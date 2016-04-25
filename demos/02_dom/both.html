@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testpagina</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div class="product">
+		<a href="http://www.google.be"><img src="../../img/02_dom/me.jpg" alt=""></a>
+	</div>
+	<p>(click the image)</p>
+
+	<script>
+		document.querySelector('.product').addEventListener('click', function() {
+			alert('div clicked');
+		});
+		document.querySelector('.product img').addEventListener('click', function() {
+			alert('img clicked');
+		});
+		document.querySelector('body').addEventListener('click', function() {
+			alert('body clicked');
+		});
+		document.querySelector('.product a').addEventListener('click', function(e) {
+			alert('a clicked');
+			e.stopPropagation();
+			e.preventDefault();
+		});
+	</script>
+</body>
+</html>

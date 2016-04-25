@@ -1,0 +1,2024 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Javascript &mdash; Syntax</title>
+  <meta name="author" content="Rogier van der Linde - ikdoeict.be">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="library/reveal/css/reveal.min.css">
+  <link rel="stylesheet" href="library/reveal/css/theme/rogier.css" id="rogier">
+  <link rel="stylesheet" href="library/highlight/styles/vs.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/01_syntax.css">
+</head>
+
+<body>
+
+  <!-- SLIDES -->
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      <!-- 0 : Title -->
+      <section>
+        <h1>JAVASCRIPT SYNTAX</h1>
+        <small>use the arrow keys to navigate; press space for slide overview<br /></small>
+        <figure>
+          <img src="img/01_syntax/icon.png" alt="" width="400" />
+          <figcaption>
+
+          </figcaption>
+        </figure>
+        <div class="tooltip" style="position: absolute; left: 634px; bottom: 57px; text-align: left">
+          <div>
+            This code is actually the logic of a fully functional tetris game (without keyboard events and display). There's even a version smaller than the size of a tweet; you can play it <a href="demos/01_syntax/tetris.html">here</a>
+            <br />
+            Javascript can be so compact, there's a special contest for <a href="http://js1k.com/">&lt;1k programs</a>. Some fine winners <a href="demos/01_syntax/js1k_1.html">here</a>, <a href="demos/01_syntax/js1k_2.html">here</a> and <a href="demos/01_syntax/js1k_3.html">here</a>. Don't forget to check the source code.
+          </div>
+        </div>
+
+        <footer>
+          <a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:rogier.vanderlinde@odisee.be">rogier.vanderlinde@odisee.be</a>
+        </footer>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Introducing Javascript</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="Scripting languages">
+          <h2>Scripting languages (1)</h2>
+          <ul>
+            <li>
+              Scripts were originally programs written to automate tasks which could alternatively be executed one-by-one by a human.
+            </li>
+            <li>
+              Differences from classic languages like Java, C#, C++...:
+              <ul>
+                <li>
+                  Codelines aren't compiled or linked but executed on the fly (just-in-time or JIT compilation). If there's an error halfway, the first half is still executed before the script halts.
+                </li>
+                <li>
+                  Looser programming style: weak and dynamic typing, OO concepts are often different or totally absent
+                </li>
+                <li>
+                  Syntactically, scripting languages can be rather 'special'
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Scripting languages (2)</h2>
+          <ul>
+            <li>
+              Biggest advantage of JIT compilation: better portability (text instead of machine code).
+            </li>
+            <li>
+              JIT comes with a penalty; Javascript is about 3 times slower than C++. Also, JIT makes decent intellisense and debugging much more difficult to implement.
+            </li>
+            <li>
+              Also, scripts are clear text, so harder to protect your work from other programmers
+            </li>
+            <li>
+              Quite a few scripting languages exist serverside (PHP, Python, ASP, C via CGI, Perl, Ruby...), but browsers understand only one language: <em>Javascript</em>.
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Javascript is not Java</h2>
+          <div style="text-align:center">
+            <figure>
+              <img src="img/01_syntax/hamster.png" alt="JavaScript is to Java as Ham is to Hamster" title="JavaScript is to Java as Ham is to Hamster" width="500" height="284" style="border-color: #FFF; border-width: 12px;" />
+              <figcaption>Dixit <a href="http://adactio.com/">Jeremy Keith</a>, Cartoon by <a href="http://www.flickr.com/photos/manssandstrom/4132454413/in/photostream/">Brad Colbow</a></figcaption>
+            </figure>
+          </div>
+        </section>
+        <section>
+          <h2>History</h2>
+          <ul>
+            <li>
+              Originally created by Netscape in 1995, originally named Mocha, later LiveScript and finally Javascript
+            </li>
+            <li>
+              Microsoft introduced Javascript support in IE3, renaming it to JScript to avoid trademark issues
+            </li>
+            <li>
+              Submitted to ECMA for standardization in 1996, resulting in ECMAScript (currently version 5.1). Watch out for the upcoming revolutionary Harmony version (work in progress).
+            </li>
+            <li>
+              Officially, JavaScript is maintained by Mozilla nowadays (version 1.8.5).
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>JavaScript Engines</h2>
+          <ul>
+            <li>
+              Browsers have a built-in engine to interpret JavaScript
+              <ul>
+                <li><a href="https://developer.mozilla.org/en/SpiderMonkey">SpiderMonkey</a> in Firefox</li>
+                <li><a href="http://code.google.com/p/v8/">V8</a> in Chrome</li>
+                <li><a href="http://www.webkit.org/projects/javascript/index.html">JavaScriptCore</a> (SquirrelFish/Nitro) in Webkit/Safari</li>
+                <li><a href="http://my.opera.com/ODIN/blog/carakan-faq">Carakan</a> in Opera</li>
+                <li><a href="http://en.wikipedia.org/wiki/Chakra_%28JScript_engine%29">Chakra</a> in IE</li>
+              </ul>
+            </li>
+            <li>
+              May actually run on any system with a JS interpreter:
+              <uL>
+                <li>on Windows OS through the Windows Scripting Host</li>
+                <li>on a server with <a href="http://nodejs.org/">Node.js</a>, powered by Google's V8</li>
+                <li>on Java-enabled systems with <a href="https://developer.mozilla.org/en/Rhino">Rhino</a>, an open source JavaScript engine developed by Mozilla and written in Java</li><!-- to enable end users to script the system -->
+                <li>embedded in pdf's, OpenOffice, in Chrome, Safari or Opera extensions, Photoshop plugins, desktop Widgets...</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              in this course we'll focus on browsers
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Running Javascript</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>In the shell</h2>
+          <ul>
+            <li>
+              From a shell, e.g. Windows Scripting Host:
+              <div><pre class="bigger"><code class="language-javascript">WScript.StdOut.Write("Enter your name> ")
+var name = WScript.StdIn.ReadLine()
+WScript.StdOut.Write('Hello ' + name)</code></pre></div>
+              <div><pre class="bigger"><code class="donthighlight" style="background-color: black; color: white">C:\Users\Rogier\Desktop>cscript test.js
+Microsoft (R) Windows Script Host Version 5.8
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Enter your name> Rogier
+Hello Rogier
+C:\Users\Rogier\Desktop></code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              interaction with the Operating System differs from interaction with browsers, but the syntax (variables, loops, objects...) is the same
+            </li>
+            <li>
+              In Mac you can use jsc (JavaScriptCore), see <a href="files/jsc.zip">jsc.zip</a> for instructions
+            </li>
+          </ul>
+
+        </section>
+        <section>
+          <h2>In the address bar</h2>
+          <ul>
+            <li>
+              From the address bar of a browser:
+              <figure style="margin-top: 10px">
+                <img src="img/01_syntax/addresbar.png" width="500" class="border" alt="" />
+                <figcaption></figcaption>
+              </figure>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              may be useful to perform small tasks on an open webpage
+            </li>
+            <li>
+              can be saved as a bookmark: <i>bookmarklets</i>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>With a bookmarklet</h2>
+          <ul>
+            <li>
+              Example of a bookmarklet:
+              <div><pre class="bigger"><code class="language-javascript" style="word-wrap: break-word">javascript:var x=document.getElementsByTagName("input");for(var i=0;i&lt;x.length;i++) {if (x[i].type == 'checkbox') {x[i].checked=true;}}; alert('Done, all checkboxes are selected');</code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              save this 'URL' in a bookmark on the bookmarks toolbar, open any webpage with checkboxes, click on the bookmarklet and see what happens...
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              In Chrome, after copy-pasting it to the address bar, manually add 'javascript:' at the beginning before dragging it to the bookmarks bar
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="In HTML">
+          <h2>In HTML (1)</h2>
+          <ul>
+            <li>
+              In HTML, linked in the head or body:
+              <div><pre class="bigger"><code class="language-html">&lt;body&gt;
+  ...
+  &lt;script src="js/pagescripts.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre></div>
+              <div><pre class="bigger"><code class="language-javascript">alert('hello'); // code in pagescripts.js</code></pre></div>
+            </li>
+            <li>
+              In HTML, script block:
+              <div><pre class="bigger"><code class="language-html">...
+&lt;body&gt;
+...
+  &lt;script&gt;
+    alert('hello');
+  &lt;/script&gt;
+&lt;/body&gt;</code></pre></div>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              You can put script blocks anywhere (<code>&lt;head&gt;</code> or <code>&lt;body&gt;</code>), but the best place for scripts is actually just before the end of <code>&lt;body&gt;</code>. This allows the HTML to load first, which creates a better user experience, especially when scripts are large. Browsers limit the number of parallel downloads of images, scripts, css..., and it is better to load the visible resources first and scripts last.
+            </div>
+          </div>
+        </section>
+        <section data-toc-title="">
+          <h2>In HTML (2)</h2>
+          <ul>
+            <li>
+              In HTML, inline:
+              <div><pre class="bigger"><code class="language-html overlayrun">&lt;input type="button" value="I'm a button" onclick="alert('auch')" /&gt;
+              </code></pre></div>
+          </ul>
+          <ul class="arrow">
+            <li>
+              we won't use inline scripts, for the same reason we don't use inline styles
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Input / output</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Read from the shell</h2>
+          <ul>
+            <li>
+              In Windows Scripting Host use <code>StdOut.Write()</code> and <code>StdIn.ReadLine()</code>:
+              <div><pre class="bigger"><code class="language-javascript inputOutputCode">WScript.StdOut.Write('Enter your name>')<span class="colon">;</span>
+var name = WScript.StdIn.ReadLine()<span class="colon">;</span> // we'll get to variables later
+WScript.StdOut.Write('Hello ' + name)<span class="colon">;</span></code></pre></div>
+            </li>
+            <li>
+              You can also use command line arguments:
+              <div><pre class="bigger"><code class="language-javascript">var numArgs = WScript.arguments.length;
+for (var i = 0; i &lt; WScript.arguments.length; i++) {
+  WScript.StdOut.Write('Hello ' + WScript.arguments(i) + '\n');
+}
+</code></pre></div>
+              <div><pre class="bigger"><code class="donthighlight" style="background-color: black; color: white">C:\Users\Rogier\Desktop>cscript test.js An Bob
+Microsoft (R) Windows Script Host Version 5.8
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Hello An
+Hello Bob
+C:\Users\Rogier\Desktop></code></pre></div>
+            </li>
+          </ul>
+
+        </section>
+        <section>
+          <h2>Read from the browser</h2>
+          <ul>
+            <li>
+              In a browser you can use the browser window methods <code>alert()</code>, <code>confirm()</code> and <code>prompt()</code>:
+              <div><pre class="bigger"><code class="language-javascript overlayrun inputOutputCode">var name = window.prompt('Enter your name')<span class="colon">;</span>
+window.alert('Hello ' + name)<span class="colon">;</span>
+var doHighfive = window.confirm('High five?')<span class="colon">;</span>
+if (doHighfive) window.alert('High five!')<span class="colon">;</span></code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              you can use <input type="button" value="double" id="btnDouble" /> or <input type="button" value="single" id="btnSingle" /> quotes, but single quotes are more common
+            </li>
+            <li>
+              you can <input type="button" value="leave out" id="btnWithoutWindow" /> the window object for these methods
+            </li>
+            <li>
+              ending semicolons <input type="button" value="not required" id="btnWithoutColon" />, but we'll <input type="button" value="use" id="btnWithColon" /> them anyway
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Write to the browser</h2>
+          <ul>
+            <li>
+              You can also write to the browser document:
+              <div><pre class="bigger"><code class="language-javascript">document.write('&lt;p&gt;Hello Rogier&lt;/p&gt;');</code></pre></div>
+            </li>
+            <li>
+              This can be used to hide your e-mail from bots:
+              <div><pre class="bigger"><code class="language-html overlayrun">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h1&gt;Contact form&lt;/h1&gt;
+  &lt;script&gt;
+    var part1 = "rogier.vanderlinde";
+    var part2 = "odisee.be";
+    var part3 = "send me a message";
+    document.write('&lt;a href="mai' + 'lto:' + part1 + '@' + part2 + '"&gt;');
+    document.write(part3 + '&lt;/a&gt;');
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Read/write HTML elements">
+          <h2>Read/write HTML elements (1)</h2>
+          <ul>
+            <li>
+              You can actually read and write any HTML element:
+              <div><pre class="bigger"><code class="language-html overlayrun">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;style&gt;input[type=text] { width: 60px; text-align: right }&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Calculator&lt;/h1&gt;
+  &lt;input type="text" id="inp1" /&gt;
+  &lt;input type="button" value="x2 = " id="btn1" /&gt;
+  &lt;input type="text" id="inp2" /&gt;
+  &lt;script&gt;
+    document.getElementById('btn1').addEventListener('click', function() {
+      document.getElementById('inp2').value
+        = parseInt(document.getElementById('inp1').value) * 2;
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Read/write HTML elements (2)</h2>
+          <ul>
+            <li>
+              Interaction with HTML elements is for next week. For now we'll just focus on the Javascript syntax.
+            </li>
+            <li>
+              On the remaining slides, we'll use <code>alert()</code> and alikes for output because it is a little bit easier to demonstrate, but during the first lab session we'll first use the <code>WScript</code> methods to practice al little bit on the Javascript syntax alone.
+            </li>
+            <li>
+              And now...
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Variables and constructors</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Creating variables</h2>
+          <ul>
+            <li>
+              A variable has a name and a value:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var quoteOfTheDay = 'Now have that tasty morning burger';
+alert(quoteOfTheDay);</code></pre></div>
+            </li>
+            <li>
+              An unassigned variable has the value <i>undefined</i>:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var quoteOfTheDay;
+alert(quoteOfTheDay);</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Functions as variables</h2>
+          <ul>
+            <li>
+              Functions are simply variables too, really:
+              <div><pre class="bigger"><code contenteditable class="language-javascript">var sayHello = function() { alert('hello') };
+</code></pre></div>
+            </li>
+            <li>
+              Execute a function with the () operator:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var sayHello = function() { alert('hello') };
+sayHello(); // hello
+</code></pre></div>
+            </li>
+            <li>
+              You can assign them to other variables:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var sayHello = function() { alert('hello') };
+var answer = sayHello;
+answer(); // hello
+</code></pre></div>
+            </li>
+            <li>
+              Or use them as parameters:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var sayHello = function() { alert('hello') };
+var echo = function(fn) {
+  fn(); fn(); fn();
+}
+echo(sayHello); // hello hello hello
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Objects</h2>
+          <ul>
+            <li>
+              Creating objects is simple:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">// Object Literal
+var forrest = {
+  firstName : 'Forrest',
+  lastName : 'Gump',
+  sentence : 'Stupid is as stupid does',
+  says : function() {
+    return this.sentence;
+  }
+};
+
+// accessing properties
+console.log(forrest);
+alert(forrest['firstName']); // hash notation
+alert(forrest.firstName); // preferred notation
+alert(forrest.says());
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Literals and constructors">
+          <h2>Literals and constructors (1)</h2>
+          <ul>
+            <li>
+              In Java you can create variables as literals or through a constructor:
+              <div><pre class="bigger"><code class="language-javascript">Integer num = 3; // is a literal
+Integer num = new Integer(3); // is an object</code></pre></div>
+            </li>
+            <li>
+              This is the same in Javascript:
+              <div><pre class="bigger"><code class="language-javascript">var num = 3; // is a literal
+var num = new Number('3'); // is an object
+
+var boo = true; // is a literal
+var boo = new Boolean('hmmm...'); // is an object (parses to true)
+
+var str = 'hello'; // is a literal
+var str = new String('hello'); // is an object</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Literals and constructors (2)</h2>
+          <ul>
+            <li>
+              Some variables created with their constructor:
+              <div><pre class="bigger"><code class="language-javascript">var num = new Number(3);
+var boo = new Boolean('true');
+var str = new String('hello');
+var fun = new Function('nm', "alert('hello' + nm)");
+var arr = new Array(1, 2, 3, 5, 8, 13);
+var rex = new RegExp("^\d+$");
+var obj = new Object(); obj.id = 2; obj.url = 'img/me.jpg'; obj.hidden = false;
+var dat = new Date();
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Literals and constructors (3)</h2>
+          <ul>
+            <li>
+              Their literal counterpart:
+              <div><pre class="bigger"><code class="language-javascript">var num = 3;
+var boo = true;
+var str = 'hello';
+var fun = function(nm) { alert('hello' + nm) };
+var arr = [1, 2, 3, 5, 8, 13];
+var rex = /^\d+$/
+var obj = { id: 2, url: 'img/me.jpg', hidden: false }
+var dat = new Date(); // not for every constructor a literal exists!
+</code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              use literals unless you have a specific reason to use a constructor
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Undefined, NaN, Infinity</h2>
+          <ul>
+            <li>
+              An existing but unassigned variable has the value and type <code>undefined</code>:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var test1;
+alert(test1); // undefined
+alert(typeof test1); // undefined
+alert(test1 === undefined); // true
+</code></pre></div>
+            </li>
+            <li>
+              A variable that should be a number but cannot be calculated has the value <code>NaN</code> (Not a Number):
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var test1 = 7 * "bladibla"; // multiplication yields numbers
+alert(test1); // NaN
+alert(typeof test1); // number
+alert(isNaN(test1)); // true
+</code></pre></div>
+            </li>
+            <li>
+              For division by zero we have <code>Infinity</code>:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var test = 6 / 0;
+alert(test); // Infinity
+alert(typeof test); // number
+alert(test === Infinity); // true
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Types</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Types</h2>
+          <ul>
+            <li>
+              Every variable has a type and a constructor. Javascript knows the following types:
+              <ul>
+                <li>string</li>
+                <li>number (incl. NaN)</li>
+                <li>boolean</li>
+                <li>function</li>
+                <li>object (incl. null)</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Typeof, instanceof</h2>
+          <ul>
+            <li>
+              You can find the type with <code>typeof</code>. For variables created with a constructor, this is always <code>object</code>:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var num1 = 3;
+alert(typeof num1); // number
+var num2 = new Number(3);
+alert(typeof num2); // object
+</code></pre></div>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              You can check the constructor with <code>instanceof</code>:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var num1 = 3;
+alert(num1 instanceof Number); // false
+var num2 = new Number(3);
+alert(num2 instanceof Number); // true
+var arr1 = ['aap', 'noot', 'mies'];
+alert(arr1 instanceof Array); // true; literal returns instance for non-primitive types
+var arr2 = new Array('aap', 'noot', 'mies');
+alert(arr2 instanceof Array); // true
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Object base type</h2>
+          <ul>
+            <li>
+              Actually all these constructors are derived from <code>Object()</code>:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var obj1 = new Date();
+var obj2 = new Array();
+alert(obj1 instanceof Date); // true
+alert(obj2 instanceof Array); // true
+alert(obj1 instanceof Object); // also true
+alert(obj2 instanceof Object); // also true
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Weak and dynamic typing</h2>
+          <ul>
+            <li>
+              Variables are <em>dynamically typed</em>, i.e. their type is determined the moment they receive a value:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var test = 123.4; // dynamic typing
+alert(typeof test);</code></pre></div>
+            </li>
+            <li>
+              Variables are also <em>weakly typed</em>, i.e. their type can change:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var myVar = 3;
+alert(typeof myVar); // type is set to 'number'
+myVar = 'three';
+alert(typeof myVar); // type is changed to 'string'
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Type conversion">
+          <h2>Type conversion (1)</h2>
+          <ul>
+            <li>
+              Adding anything to a string yields a string:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var myVar1 = 7;
+var myVar2 = 'th December 2012';
+alert(myVar1 + myVar2); // 7th December 2012
+
+var myVar3 = 7 + '';
+alert(typeof myVar3); // string
+</code></pre></div>
+            </li>
+            <li>
+              All other numeric operations yield a number. False is converted to 0, true to 1 and Javascript will try to parse strings:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var myVar1 = 7;
+alert(myVar1 + true); // 8
+alert(myVar1 * "8.32"); // 58.23
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Type conversion (2)</h2>
+          <ul>
+            <li>
+              When used in boolean expressions, unassigned variables, '', null, undefined, NaN and 0 behave as false:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var myVar1 = '';
+var myVar2 = myVar1 || 'hello'; // hello
+alert(myVar2);</code></pre></div>
+            </li>
+            <li>
+              You can force a parse with <code>parseInt()</code>, <code>toString()</code> etc..:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var myVar = '12 monkeys';
+alert(parseInt(myVar));
+var myFunc = function(x, y) { return x ^ y };
+alert(myFunc.toString());
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Identity operator</h2>
+          <ul>
+            <li>
+              Beware of implicit type conversion:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun">var var1 = '';
+alert(var1 == 0); // equal operator
+alert(var1 === 0); // identical operator
+</code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              using equal operator is considered bad practice (in Javascript <i>and</i> in PHP)
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Functions</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Defining functions</h2>
+          <ul>
+            <li>
+              Functions can be defined in three ways
+              <pre class="bigger"><code contenteditable class="language-javascript">// through constructor
+var saySomethingSmart = new Function('quote', 'alert(quote)');
+
+// through statement
+function saySomethingSmart(quote) { alert(quote); };
+
+// through expression
+var saySomethingSmart = function(quote) { alert(quote); };</code></pre>
+            </li>
+            <li>
+              The last method is the preferred one.
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Functions as arguments</h2>
+          <ul>
+            <li>
+              As stated before, functions can be used as arguments:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var end = function() {
+  alert('ok, that was funny');
+}
+
+var speak = function(quote, callback) {
+  alert(quote);
+  callback();
+}
+
+speak('Behind every great man is a woman rolling her eyes. ', end);
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section id="anonymous-function">
+          <h2>Anonymous functions</h2>
+          <ul>
+            <li>
+              You can even directly create and pass a function without declaring it first:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var speak = function(quote, callback) {
+  alert(quote);
+  callback();
+}
+
+speak('Behind every great man is a woman rolling her eyes. ', function() {
+  alert('ok, that was funny');
+});
+</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              this is called an <em>anonymous function</em>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Passing by reference</h2>
+          <ul>
+            <li>
+              As usual, non-primitives are passed by reference:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var me = {
+  name: "rogier",
+  numBeers: 0,
+  reportBeers: function() {
+    alert(this.name + ' had ' + this.numBeers + ' beers');
+  }
+};
+
+var giveBeer = function(person) {
+  person.numBeers++;
+}
+
+giveBeer(me);
+giveBeer(me);
+giveBeer(me);
+me.reportBeers();
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Passing by value</h2>
+          <ul>
+            <li>
+              Primitives are passed by value, even if created as an object:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var myVar = new Number(3);
+
+var tryToChange = function(num) {
+  num *= 2;
+}
+
+tryToChange(myVar);
+alert(myVar); // still 3</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Passing functions</h2>
+          <ul>
+            <li>
+              Functions are passed by value too:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var gangstaGreet = function() {
+  alert('Yo H, u watch Pimp Ma Ride Uk, tha westwood aint a G');
+}
+
+var tryToChange = function(fn) {
+  fn = function() {
+    alert('hi, how are you');
+  }
+}
+
+tryToChange(gangstaGreet);
+
+gangstaGreet(); // still unchanged</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Passing an object instead</h2>
+          <ul>
+            <li>
+              You can fix this by passing an object instead of a function:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var gangsta = {
+  name: 'Stank Ho',
+  greet : function(num) {
+    alert('Yo H, u watch Pimp Ma Ride Uk, tha westwood aint a G');
+  }
+}
+
+var tryToEducate = function(person) {
+  person.greet = function(num) {
+    alert('hi, I\m ' + this.name + ', how are you');
+  }
+  alert('...education ok...');
+}
+
+gangsta.greet();
+tryToEducate(gangsta);
+gangsta.greet(); // ok now</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Arguments array">
+          <h2>Arguments array (1)</h2>
+          <ul>
+            <li>
+              Say you have a function that should work given any number of parameters
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var sum = function(a, b, c, d, e) {
+  return a + b + c + d + e
+};
+alert(sum(1,2)); // NaN (!)
+alert(sum(1,2,3,4,5)); // 15
+alert(sum(1,2,3,4,5,6)); // What now?</code></pre>
+              <ul class="arrow">
+                <li>You can tell by just looking at it: it's bound to fail</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Arguments array (2)</h2>
+          <ul>
+            <li>
+              Luckily we can leave out the arguments and use the <code>arguments</code> property:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var sum = function() {
+  var total = 0;
+  for (var i = 0, len = arguments.length; i &lt; len; i++) {
+    total += parseInt(arguments[i]);
+  }
+  return total;
+};
+alert(sum(1,2));
+alert(sum(1,2,3,4,5));
+alert(sum(1,2,3,4,5,6));</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Single object parameter</h2>
+          <ul>
+            <li>
+              Another nice pattern is using an object as parameter, and use its properties:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var getWeight = function(thing) {
+  return thing.width * thing.height * thing.depth * thing.density;
+}
+
+var stone = {
+  kind: 'lapis lazuli',
+  width: 3,
+  height: 0.8,
+  depth: 6,
+  density: 0.5,
+  color: 'darkblue'
+}
+
+alert(getWeight(stone));
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Anonymous objects</h2>
+          <ul>
+            <li>
+              You may also directly pass the object, without declaring it first:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">var getWeight = function(thing) {
+  return thing.width * thing.height * thing.depth * thing.density;
+}
+
+alert(getWeight({
+  kind: 'lapis lazuli',
+  width: 3,
+  height: 0.7,
+  depth: 6,
+  density: 0.5,
+  color: 'darkblue'
+}));
+</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              this is called an <em>anonymous object</em>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Objects</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>OO in Javascript</h2>
+          <ul>
+            <li>
+              Javascript has a whole different approach to OO and doesn't offer things like access modifiers or inheritance. You can however create a constructor by using a function:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun smallpanel">// build constructor
+var Car = function(make, year, started) {
+  this.make = make;
+  this.year = year;
+  this.started = started;
+  this.describe = function() {
+    alert(this.year + ' ' + this.make + (this.started ? ': engine running' : ': engine not running'));
+  }
+  this.start = function() {
+    this.started = true;
+    this.describe();
+  }
+}
+
+// create the cars
+var myCar = new Car('Mercury Bobcat', 1978, false);
+var yourCar = new Car('Fiat Panda', 2002, false);
+
+// now start the cars
+myCar.start();
+yourCar.start();
+
+// verify its type and constructor
+alert(typeof myCar == 'object');
+alert(myCar instanceof Car);
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Prototype property</h2>
+          <ul>
+            <li>
+              You can extend an existing constructor with the <code>prototype</code> property:
+              <pre class="bigger"><code contenteditable class="language-javascript">...
+
+// extend constructor
+Car.prototype.stop = function() {
+  this.started = false;
+}
+Car.prototype.honk = function() {
+  alert('tuut tuut');
+}
+
+// use new functions
+myCar.stop();
+myCar.honk();</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Extending built-in classes</h2>
+          <ul>
+            <li>
+              You can even extend built-in classes:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// extend String
+String.prototype.ltrimUnderscores = function() {
+  return this.replace(/^_+/, "");
+}
+
+// test our new String function
+alert('____test____'.ltrimUnderscores());
+
+// extend Array
+Array.prototype.contains = function(obj) {
+  for (var i = 0; i &lt; this.length; i++) {
+    if (this[i] === obj) return true;
+  }
+  return false;
+}
+
+// test our new Array function
+var arr = ['aap', 'noot', 'mies'];
+alert(arr.contains('wim'));
+alert(arr.contains('noot'));
+</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              this is considered bad practice and not allowed in strict mode (see further)
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Lego with Javascript</h2>
+          <ul>
+            <li>
+              Javascript is a bit like lego. You can also add arbitrary new properties to existing objects too:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// create Person constructor
+var Person = function(nm) {
+  this.name = nm;
+}
+
+// create persons
+var person1 = new Person('Alice');
+var person2 = new Person('Bob');
+
+// create feeding program
+var giveFood = function(person) {
+  if (person.isServed) {
+    alert('you already had your portion, ' + person.name);
+    return;
+  }
+  alert('here is your portion, ' + person.name);
+  person.isServed = true; // &larr; add new property
+}
+
+// serve
+giveFood(person1);
+giveFood(person2);
+giveFood(person1);
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>More lego with Javascript</h2>
+          <ul>
+            <li>
+              You can actually attach anything to anything (except boolean, string and number literals)
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// attaching a text to a primitive; doesn't work
+var test1 = 1;
+test1.someText = 'hello 1';
+alert(test1.someText); // undefined
+
+// attaching a text to a Number
+var test2 = new Number(1);
+test2.someText = 'hello';
+alert(test2.someText);  // hello
+
+// attaching a function to an array
+var test3 = [1, 3, 7];
+test3.count = function() {
+  alert(this.length);
+};
+test3.count(); // 3
+
+// attaching a number to a function
+var test4 = new function() {};
+test4.someNumber = 99;
+alert(test4.someNumber); // 99
+
+// attaching a number to an array to a function to an object
+var test5 = {};
+test5.someFunction = function(){};
+test5.someFunction.someArray = [];
+test5.someFunction.someArray.someNumber = 100;
+alert(test5.someFunction.someArray.someNumber);  // 100
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Namespaces">
+          <h2>Namespaces (1)</h2>
+          <ul>
+            <li>
+              A good practice is namespacing your code. This is easy done by creating a root object, and adding your code as properties. An example for a Javascript library:
+              <pre class="bigger"><code contenteditable class="language-javascript">var ROGIER = new Object();
+ROGIER.navigationFunctions = new Object();
+ROGIER.navigationFunctions.getScrollX = function() {...}
+ROGIER.navigationFunctions.getScrollY = function() {...}
+ROGIER.navigationFunctions.getByClass = function(...) {...}
+ROGIER.cookieFunctions = new Object();
+ROGIER.cookieFunctions.setCookie = function(...) {...}
+ROGIER.cookieFunctions.getCookie = function(...) {...}
+ROGIER.cookieFunctions.delCookie = function(...) {...}
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Name spaces (2)</h2>
+          <ul>
+            <li>
+              A namespacing example for a web application:
+              <pre class="bigger"><code contenteditable class="language-javascript">// main application
+myApplication = new Object();
+myApplication.init = function() {
+  myApplication.myModule1.init();
+  myApplication.myModule2.init();
+}
+
+// module 1
+myApplication.myModule1 = {
+  init: function() {
+    // init module 1 here
+  }
+  // some more code here
+}
+
+// module 2
+myApplication.myModule2 = {
+  init: function() {
+    // init module 2 here
+  }
+  // some more code here
+}
+
+</code></pre>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Scope</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Control structures</h2>
+          <ul>
+            <li>
+              The <em>scope</em> is the environment in which a variable exist. Control structures like iterations or selections do not define a new scope:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun ">var i = 100; // outer foo
+for (var i = 0; i &lt; 10; i++) {
+  // i points to outer i
+}
+alert(i); // i has changed to 10
+</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Var keyword</h2>
+          <ul>
+            <li>
+              Functions do define a new scope, but only for variables with the <code>var</code> keyword:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun ">var var1 = 'kot kot kedei'; // global
+var foo = function() {
+  var var2 = 'kukeleku'; // local
+  var3 = 'toktok'; // global
+  alert('foo says ' + var1);
+  alert('foo says ' + var2);
+  alert('foo says ' + var3);
+};
+
+foo();
+alert('global says ' + var1);
+// alert('global says ' + var2); will fail
+alert('global says ' + var3);</code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              using global variables is a bad programming practice (and forbidden in the Strict Mode introduced in ECMAScript 5); always use the <code>var</code> keyword
+            </li>
+         </ul>
+        </section>
+        <section>
+          <h2>Self invoking anon. functions</h2>
+          <ul>
+            <li>
+              You can wrap a piece of code in a new scope with a <em>self invoking anonymous function</em>:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">(function() {
+    var number1 = 5;
+    var number2 = 7;
+
+    alert('the sum of ' + number1 + ' and ' + number2 + ' is: ' + (number1 + number2));
+    alert('variable "number2" is accessible inside the function; its type is ' + typeof number1);
+})();
+
+alert('variable "number1" is not accessible outside the function; its type is ' + typeof number1);
+</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              this encapsulates your variables, hidden for the outside world (good practice!)
+            </li>
+            <li>
+              don't forget the <code>var</code> keyword, or your variable becomes global (try it out above)
+            </li>
+            <li>
+              we will use this structure a lot
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Closures">
+          <h2>Closures</h2>
+          <ul>
+            <li>
+              A nasty consequence of the Javascript scoping model is closures:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun wrong">var obj = {};
+
+// loop creating three new functions
+for (var i = 0; i &lt; 3; i++) {
+  obj['testFunction' + i] = function() {
+    alert(i);
+  }
+}
+
+// test the functions
+obj.testFunction0(); // alerts 3!
+obj.testFunction1(); // alerts 3!
+obj.testFunction2(); // alerts 3!</code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              the <code>i</code> variable belongs to the <code>initTest</code> function scope, not the <code>for</code>
+            </li>
+            <li>
+              it keeps to exist with its final value 3 after the loop exits
+            </li>
+            <li>
+              it is shared and has the same value for the three created function
+            </li>
+         </ul>
+        </section>
+        <section data-toc-title="" id="closures-solution-1">
+          <h2>Closures &ndash; solution 1</h2>
+          <ul>
+            <li>
+              A solution is to move the function definition outside the loop:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun smallpanel right">var obj = {};
+
+// intermediate function
+function addFunction(i, obj) {
+  obj['testFunction' + i] = function() {
+    alert(i);
+  }
+}
+
+// loop creating three new functions
+for (var i = 0; i &lt; 3; i++) {
+  addFunction(i, obj);
+}
+
+// test the functions
+obj.testFunction0(); // alerts 0
+obj.testFunction1(); // alerts 1
+obj.testFunction2(); // alerts 2</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="" id="closures-solution-2">
+          <h2>Closures &ndash; solution 2</h2>
+          <ul>
+            <li>
+              Another solution is to encapsulate the function definition, and copy the <code>i</code> variable to a new encapsulated variable <code>j</code>:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun smallpanel right">var obj = {};
+
+// encapsulated loop
+for (var i = 0; i &lt; 3; i++) {
+  (function() {
+    var j = i;
+    obj['testFunction' + j] = function() {
+      alert(j);
+    }
+  })();
+}
+
+// test the functions
+obj.testFunction0(); // alerts 0
+obj.testFunction1(); // alerts 1
+obj.testFunction2(); // alerts 2</code></pre></div>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Closures</h2>
+          <ul>
+            <li>
+              Another closure example:
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun wrong">var arrObjects = [{name: 'Alice'}, {name: 'Bob'}, {name: 'Clive'}];
+
+// loop creating three new functions
+for (var i = 0; i &lt; arrObjects.length; i++) {
+  arrObjects[i].sayHello = function() {
+    alert('hi, my name is ' + arrObjects[i].name);
+  }
+}
+
+// Javascript error!
+arrObjects[1].sayHello(); </code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              function executes <code>alert(arrObjects[i].name)</code>
+            </li>
+            <li>
+              <code>i</code> is 3, so function executes <code>alert(arrObjects[3].name)</code>
+            </li>
+            <li>
+              <code>arrObjects[3]</code> does not exist, so an error is thrown
+            </li>
+         </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Closures &ndash; solution 3</h2>
+          <ul>
+            <li>
+              You can often prevent using <code>i</code> by using <code>this</code> instead, which refers to the object calling the function
+              <div><pre class="bigger"><code contenteditable class="language-javascript overlayrun right">var arrObjects = [{name: 'Alice'}, {name: 'Bob'}, {name: 'Clive'}];
+
+// loop creating three new functions
+for (var i = 0; i &lt; arrObjects.length; i++) {
+  arrObjects[i].sayHello = function() {
+    alert('hi, my name is ' + this.name);
+  }
+}
+
+// correctly says 'hi, my name is Bob'
+arrObjects[1].sayHello(); </code></pre></div>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              just remember: never use <code>i</code> in a function defined in a loop!
+            </li>
+         </ul>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Quick syntax recap</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section>
+          <h2>Selections</h2>
+          <div>
+            <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// if - else
+var badGrades = true;
+if (badGrades) {
+  alert('House arrest for two weeks');
+} else {
+  alert('No house arrest');
+}
+
+// switch - case
+var age = 10, lifeState;
+switch (age) {
+  case 10: lifeState = 'Young'; break;
+  case 60: lifeState = 'Old'; break;
+  default: lifeState = 'unknown'; break;
+}
+alert(lifeState);</code></pre>
+          </div>
+        </section>
+        <section data-toc-title="For iterations">
+          <h2>For iterations (1)</h2>
+          <div>
+            <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// loop over array
+var forrestFriends = ['Bubba', 'Lieutenant Dan'];
+
+for (var i = 0; i &lt; forrestFriends.length; i++) {
+  alert(forrestFriends[i]);
+}
+</code></pre>
+          </div>
+          <div>
+            <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// loop over object
+var forrest = {
+  firstName : 'Forrest',
+  lastName : 'Gump'
+};
+
+for (var prop in forrest) {
+  alert(prop + ' = ' + forrest[prop]);
+}</code></pre>
+          </div>
+        </section>
+        <section data-toc-title="">
+          <h2>For iterations (2)</h2>
+          <div>
+            Beware that <code>for ... in</code> iterates keys, not values:
+            <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// what will be the result?
+var friends = ['dan', 'anthony', 'pavel'];
+for (var friend in friends) {
+  alert(name);
+}</code></pre>
+          </div>
+        </section>
+        <section>
+          <h2>While iterations</h2>
+          <div>
+            <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// while
+var count = 5;
+while (count > 0) {
+  console.log(count);
+  count--;
+}
+
+// do - while
+var count = 5;
+do {
+  console.log(count);
+  count--;
+} while (count > 0);
+
+// Tip: retry this example with count = 0 as starting value
+</code></pre>
+          </div>
+        </section>
+        <section>
+          <h2>Break</h2>
+          <ul>
+            <li>Break jumps to the end of the statement &amp; aborts current task</li>
+            <li>
+              Valid inside <code>switch</code>, <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>
+            </li>
+            <li>
+              Example
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">for (var x = 1; x &lt;= 5; x++) {
+var y = 1;
+  while (y &lt;= 7) {
+    if (y == 5) { break; }
+    console.log(x + '-' + y);
+    y++;
+  }
+}</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Break &amp; label</h2>
+          <ul>
+            <li>
+              To break the outer loop, one can make use of a <em>label</em>
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">myForLoop:
+for (var x = 1; x &lt;= 5; x++) {
+  var y = 1;
+  while (y &lt;= 7) {
+    if (y == 5) { break myForLoop; }
+    console.log(x + '-' + y);
+    y++;
+ }
+}</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              if you find yourself using this, you might rethink your code style
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Continue</h2>
+          <ul>
+            <li>Continue jumps back to start of statement and continues with next item</li>
+            <li>Valid inside <code>for</code>, <code>for-in</code>, <code>while</code>, and <code>do-while</code>
+            <li>
+              Example
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">for (var x = 1; x &lt;= 5; x++) {
+  for (var y = 1; y &lt;= 7; y++) {
+    if (y == 5) continue;
+    console.log(x + '-' + y);
+  }
+}</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Continue &amp; label</h2>
+          <ul>
+            <li>
+              Using a <em>label</em> is also possible
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">myForLoop:
+for (var x = 1; x &lt;= 5; x++) {
+  for (var y = 1; y &lt;= 7; y++) {
+    if (y == 5) { continue myForLoop; }
+    console.log(x + '-' + y);
+  }
+}</code></pre>
+            </li>
+          </ul>
+          <p><small>In this example you get the same result as the first <code>break</code> example</small></p>
+        </section>
+        <section>
+          <h2>Try-Catch(-Finally)</h2>
+          <div>
+            <pre class="bigger"><code contenteditable class="language-javascript overlayrun">// create an object
+var forrest = {
+  firstName : 'Forrest',
+  lastName : 'Gump',
+  says : function() {
+    console.log('Stupid is as stupid does');
+  }
+};
+
+// try-catch
+try {
+  forrest.functionDoesNotExist();
+} catch (error) {
+  console.error('ERROR! ' + error.name + ' : ' + error.message);
+}
+
+// try-catch-Finally
+try {
+  forrest.functionDoesNotExist();
+} catch (error) {
+  console.error('ERROR! ' + error.name + ' : ' + error.message);
+} finally {
+  forrest.says();
+}
+</code></pre>
+          </div>
+        </section>
+        <section>
+          <h2>Functions references</h2>
+          <ul>
+            <li>
+              Althought Javascript has a rather limited set of built-in functions compared to PHP, it offers most basic functions. Some references:
+              <ul>
+                <li><a href="http://www.w3schools.com/js/default.asp">http://www.w3schools.com/js/default.asp</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference">https://developer.mozilla.org/en-US/docs/JavaScript/Reference</a></li>
+                <li><a href="http://es5.github.com/">http://es5.github.com/</a></li>
+                <li><a href="http://www.google.com/">http://www.google.com/</a> (usually the fastest, believe me)</li>
+              </ul>
+            </li>
+            <li>
+              Good reading on performance optimization:
+              <ul>
+                <li><a href="http://www.html5rocks.com/en/tutorials/speed/v8/">http://www.html5rocks.com/en/tutorials/speed/v8/</a></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>JAVASCRIPT SYNTAX</h1>
+          <h2>Coding rules</h2>
+          <ul class="chapterlist">
+            <!-- to be filled by Javascript -->
+          </ul>
+        </section>
+        <section data-toc-title="Comments">
+          <h2>Comments (1)</h2>
+          <ul>
+            <li>
+              comment abundantly and consistently; here's my suggested method
+            </li>
+            <li>
+              Each scriptfile: PHPDoc-style comment on top:
+              <pre class="bigger"><code contenteditable class="language-javascript">/**
+ * Customized agenda script
+ * Inspired on http://code.net//jquery-flat-timeline/
+ *
+ * @author Rogier van der Linde &lt;rogier.vanderlinde@odisee.be&gt;
+ */
+
+// ... rest of script
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Comments (2)</h2>
+          <ul>
+            <li>
+              Each function: PHPDoc-style:
+              <pre class="bigger"><code contenteditable class="language-javascript">/**
+ * Executed when the module is loaded
+ *
+ * @param mixed $needle Value we're looking for.
+ * @param array $haystack Array of values
+ *
+ * @return boolean
+ */
+var inArray = function(needle, haystack) {
+  // ...
+}</code></pre>
+            </li>
+            <li class="no-style">
+              ...or single line comment on top:
+              <pre class="bigger"><code contenteditable class="language-javascript">// initializer
+var init = function() {
+  // ...
+}</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Comments (3)</h2>
+          <ul>
+            <li>
+              Code blocks: start each block with single comment line; separate with whitelines
+              <pre class="bigger"><code contenteditable class="language-javascript">var function1 = function() {
+  // description block 1
+  statement 1;
+
+  // description block 2
+  statement 2;
+  statement 3;
+  statement 4;
+  statement 5;
+
+  // description block 3
+  statement 6;
+  statement 7;
+}
+</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              each block <i>must</i> have a description (even if it's simple); make your story complete
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Indentation</h2>
+          <ul>
+            <li>Code analysis tools like <a href="http://jshint.com/">JSHint</a> suggest indentation with 4 spaces, no tabs (exception: 2 spaces for .json files, see later)</li>
+              <pre class="bigger"><code contenteditable class="language-javascript">var test = function() {
+....var someVar = 'some value';
+....for (var i = 0; i &lt; 10; i++) {
+........// do something here
+........// do something here too
+....}
+};</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Spaces</h2>
+          <ul>
+            <li>
+              Put spaces:
+              <ul>
+                <li class="v-style">after punctuation marks (<code>, : ;</code>), not before</li>
+                <li class="v-style">before and after operators (<code>== &lt; &amp;&amp; +</code> ...) </li>
+                <li class="v-style">after keywords (<code>if, for, while, function</code> ...)</li>
+              </ul>
+            </li>
+            <li>
+              Examples:
+              <pre class="bigger"><code contenteditable class="language-javascript wrong">for(var x=0 ; x&lt;10 ; x++) {
+  // ...
+}
+var hasItems = arrItems.length>0?true:false ;
+</code></pre>
+              <pre class="bigger"><code contenteditable class="language-javascript right">for (var x = 0; x &lt; 10; x++) {
+  // ...
+}
+var hasItems = arrItems.length > 0 ? true : false;</code></pre>
+            </li>
+          </ul>
+          <div class="tooltip">
+            <div>
+              Spaces are put after keywords to distinguish with functions.
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Semicolons</h2>
+          <ul>
+            <li>
+              Put semicolons:
+              <ul>
+                <li class="v-style">after each statement</li>
+                <li class="v-style">after an assignment statement <code>var varName = {...};</code></li>
+                <li class="x-style">not after all other }</li>
+              </ul>
+            </li>
+            <li>
+              Examples:
+              <pre class="bigger"><code contenteditable class="language-javascript right">var test1 = function() {
+  console.log('test1 function executing'); // statement
+}; // assignment statement
+
+function test2() {
+  console.log('test2 function executing'); // statement
+} // don't put one here!
+
+if (x &amp;&amp; x === 9) {
+  console.log('x is nine'); // statement
+} // don't put one here!</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Curly braces">
+          <h2>Curly braces (1)</h2>
+          <ul>
+            <li>
+              Rules (apply to block statements only, not to object literals):
+              <ul>
+                <li class="v-style">always use them when optional</li>
+                <li class="x-style">don't put them on one line</li>
+              </ul>
+            </li>
+            <li>
+              Examples:
+              <pre class="bigger"><code contenteditable class="language-javascript wrong">if (some_condition)
+  ...
+else
+  ...
+
+if (some_condition) { ... }</code></pre>
+              <pre class="bigger"><code contenteditable class="language-javascript right">if (some_condition) {
+  ...
+} else {
+  ...
+}
+
+if (some_condition) {
+  ...
+}</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>
+              note: to save space these rules do not apply to these slides
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Curly braces (2)</h2>
+          <ul>
+            <li>
+              Rules (apply to block statements only, not to object literals):
+              <ul>
+                <li class="x-style">no Javascript programmer will put braces on separate lines</li>
+              </ul>
+            </li>
+            <li>
+              Examples:
+              <pre class="bigger"><code contenteditable class="language-javascript wrong">if (some_condition)
+{
+  ...
+}
+else
+{
+  ...
+}</code></pre>
+              <pre class="bigger"><code contenteditable class="language-javascript right">if (some_condition) {
+  ...
+} else {
+  ...
+}</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Identifiers</h2>
+          <ul>
+            <li>
+              Conventions:
+              <ul>
+                <li class="v-style">use camelCase for all identifiers</li>
+                <li class="v-style">exception: capitalize constructor functions, e.g. 'new F()' </li>
+              </ul>
+            </li>
+            <li>
+              Examples:
+              <pre class="bigger"><code contenteditable class="language-javascript wrong">var user_name = 'Rogier'; // should be userName
+
+var car = new function(make, color) { // should be Car
+  this.make = make;
+  this.color = color;
+  this.EngineStarted = false; // should be engineStarted
+
+  // ...
+}</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Comparison</h2>
+          <ul>
+            <li>
+              Conventions:
+              <ul>
+                <li class="x-style">avoid using == and != (check values, force cast if necessary)</li>
+                <li class="v-style">use === and !== instead (check types and values)</li>
+              </ul>
+            </li>
+            <li>
+              Examples:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">alert('42' == 42); // true
+alert('42' === 42); // false
+alert(42.0 == 42); // true
+alert(42.0 === 42); // true
+</code></pre>
+            </li>
+            <li>
+              Automatic casting with == and != can be surprising:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">alert('true' == true);
+alert('true' == false);
+alert([42] == [42]);
+alert(42 == [42]);</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="Use strict">
+          <h2>Use strict (1)</h2>
+          <ul>
+            <li>
+              New since ECMAScript 5; ignored in earlier versions
+            </li>
+            <li>
+              Turns Javascript in a more strict, cleaner mode:
+              <ul>
+                <li>prohibits some syntax that is likely an error</li>
+                <li>makes it easier for Javascript engines to optimize code</li>
+              </ul>
+            </li>
+            <li>
+              Examples:
+              <pre class="bigger"><code contenteditable class="language-javascript overlayrun">'use strict';
+
+var somevariable;
+someVariable = 7; // might be typo; new variable not allowed without 'var'
+
+var sum = function(a, a, c) { // possible mistake; duplicates not allowed
+  // ...
+}
+</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Use strict (2)</h2>
+          <ul>
+            <li>
+              Should be first line of the script or function
+            </li>
+            <li>
+              Applies to the whole function or script
+            </li>
+            <li>
+              This is a bad idea:
+              <pre class="bigger"><code contenteditable class="language-javascript wrong">'use strict';
+
+var function1 = function() {
+  // ...
+}
+
+var function2 = function() {
+  // ...
+}
+
+// ...
+</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>it would also apply to any other included code, possibly breaking it</li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Use strict (3)</h2>
+          <ul>
+            <li>
+              Better solution:
+              <pre class="bigger"><code contenteditable class="language-javascript right">var function1 = function() {
+  'use strict';
+
+  // ...
+}
+
+var function2 = function() {
+  'use strict';
+
+  // ...
+}
+
+// ...
+</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>applies to the selected functions only</li>
+          </ul>
+        </section>
+        <section data-toc-title="">
+          <h2>Use strict (4)</h2>
+          <ul>
+            <li>
+              Another solution, encapsulating your script in a self-invoking anonymous function:
+              <pre class="bigger"><code contenteditable class="language-javascript right">(function() {
+  'use strict';
+
+  var function1 = function() {
+    // ...
+  }
+
+  var function2 = function() {
+    // ...
+  }
+})();</code></pre>
+            </li>
+          </ul>
+          <ul class="arrow">
+            <li>applies to the enclosed code only</li>
+          </ul>
+        </section>
+     </section>
+
+      <section data-index-title="">
+        <section>
+          <h2>Questions?</h2>
+        </section>
+      </section>
+
+
+    </div>
+
+    <!-- ikdoeict.be Link -->
+    <a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+    <!-- Index Link -->
+    <aside class="back">
+       <nav>
+         <p><a href="index.html">&larr; Back to index</a></p>
+       </nav>
+    </aside>
+
+  </div>
+
+  <script>
+
+    var replaceAll = function(selector, patt, replace) {
+      var matches = document.querySelectorAll('.inputOutputCode');
+      for (var i = 0; i < matches.length; i++) {
+        matches[i].innerHTML = matches[i].innerHTML.replace(patt, replace);
+      }
+    }
+    document.getElementById('btnDouble').onclick = function() {
+      var patt = /'/g;
+      replaceAll('.inputOutputCode', patt, '"')
+    }
+    document.getElementById('btnSingle').onclick = function() {
+      var patt = /"/g;
+      replaceAll('.inputOutputCode', patt, "'");
+    }
+    document.getElementById('btnWithoutWindow').onclick = function() {
+      var patt = /window\./g;
+      replaceAll('.inputOutputCode', patt, "");
+    }
+    document.getElementById('btnWithoutColon').onclick = function() {
+      var patt = /;\n/g;
+      replaceAll('.inputOutputCode', patt, "\n");
+    }
+    document.getElementById('btnWithoutColon').onclick = function() {
+      var matches = document.querySelectorAll('span.colon');
+      for (var i = 0; i < matches.length; i++) {
+        matches[i].innerHTML = '';
+      }
+    }
+    document.getElementById('btnWithColon').onclick = function() {
+      var matches = document.querySelectorAll('span.colon');
+      for (var i = 0; i < matches.length; i++) {
+        matches[i].innerHTML = ';';
+      }
+    }
+  </script>
+
+  <script src="library/jquery.min.js"></script>
+  <script src="library/head.min.js"></script>
+  <script src="library/reveal/reveal.min.js"></script>
+  <script src="library/highlight/highlight.pack.js"></script>
+  <script src="library/prefixfree.js"></script>
+  <script src="library/css-snippets.js"></script>
+  <script src="library/css-edit.js"></script>
+  <script src="library/incrementable.js"></script>
+  <script src="library/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+> fun with true and false
+
+'true' == true // false; true converts to 1, 1 to '1' and 'true' is not '1'
+'true' == false // false; same story but with 0
+!'true' // false; 'true' in boolean context converts like any non-emptystring to true, and !true is false
+null == true // false; can be expected
+null == false // false; typeconversie vermoedelijk via string
+!null == !false // true; ! converteert naar boolean, dus 0 == 0
+
+
+> fun with parsing
+
+parseInt('fuck') // NaN
+parseInt('fuck', 16) // 15 = f hexadecimaal; rest wordt genegeerd
+2 + '3' // 23; opgeteld als tekst
+2 + +'3' // 5; + is ook shorthand voor parseInt
+'3' - 1 // 2 aftrekken kan niet met teksten, dus conversie nar getallen
+'3' + 1 // 31
+
+
+> fun with arrays
+
+[1, 2, 3] == [1, 2, 3] // false; objecten verschillen
+[1, 2, 3] &lt; [1, 2, 3] // false; &lt; en &gt; vergelijken wel degelijk arrays
+[1, 2, 3] &lt;= [1, 2, 3] // true; &lt;= en &gt;= vergelijken wel degelijk arrays
+[1, 2, 3] &lt; [1, 2, 5] // true; &lt;= en &gt;= vergelijken wel degelijk arrays
+[42] == [42] // false; twee objecten verschillen
+42 == [42] // true; conversie via getal
+[] == ![] // true; ![] = false, en lege array converteert naar false
+",,," == new Array(4) // true
+!+[]+[]+![] // "truefalse": !+[] = !0 = true; +[] = ""; ![] = false; true + "" + false = "truefalse"
+
+
+> fun with numbers
+
+parseFloat('Infinity') // Infinity
+parseInt('Infinity') // NaN; is niet gedefinieerd in int
+Math.min() &lt; Math.max() // false, Infinity vs. -Infinity: min starts with Infinity and looks for lower values in arguments
+0 === -0 // true; zelfde als in wiskunde: -0 = +0
+1/0 === 1/-0 // false; zelfde als in wiskunde: - vs. + oneinding
+0.1 + 0.2 === 0.3 // false due to rounding errors
+(42).toFixed(2) // 42.00
+// 42.toFixed(2) // parsing error
+42..toFixed(2) // 42.00
+9999999999999999 // 10000000000000000
+111111111111111111111
