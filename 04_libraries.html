@@ -774,6 +774,31 @@ animate();</code></pre>
             </div>
           </div>
         </section>
+        <section>
+          <h2>Double range polyfill example</h2>
+          <ul>
+            <li>
+              An <code>&lt;input type="range"&gt;</code> is supposed to support multiple values, but browsers aren't ready. Fix it with a <a href="http://leaverou.github.io/multirange/">polyfill</a>:
+              <pre class="bigger"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Double range input polyfill demo&lt;/title&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;!--[if lt IE 9]&gt;
+    &lt;script src="js/html5shiv.js"&gt;&lt;/script&gt;
+    &lt;![endif]--&gt;
+    &lt;link href="css/multirange.css" rel="stylesheet" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type="range" multiple value="10,80" /&gt;
+    &lt;script src="js/multirange.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+              <div class="demolink"><a href="demos/04_libraries/double-range-polyfill/index.html">demo</a></div>
+            </li>
+          </ul>
+        </section>
       </section>
       <section>
         <section>

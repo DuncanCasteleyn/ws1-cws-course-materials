@@ -215,15 +215,15 @@ html .reveal .slides, body .reveal .slides {
 /* styles */
 
 .reveal .v-style {
-  list-style-image: url('../../img/icons/list_style_check.png');
+  list-style-image: url('../../img/list_style_check.png');
 }
 
 .reveal .plus-style {
-  list-style-image: url('../../img/icons/list_style_plus.png');
+  list-style-image: url('../../img/list_style_plus.png');
 }
 
 .reveal .x-style {
-  list-style-image: url('../../img/icons/list_style_uncheck.png');
+  list-style-image: url('../../img/list_style_uncheck.png');
 }
 
 .reveal .no-style {
